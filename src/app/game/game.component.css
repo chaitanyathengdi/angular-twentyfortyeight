@@ -1,0 +1,9 @@
+.game {
+    color: #776e65;
+    background-color: #faf8ef;
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 450px;
+    font-family: ClearSansBold;
+    padding: 0 1rem;
+}

@@ -1,0 +1,89 @@
+/* better to use styled components instead of this? */
+.blank {
+    background-color: #d6cdc4;
+}
+
+.two {
+    color: #776e65;
+    background-color: #eee4da;
+}
+
+.four {
+    color: #776e65;
+    background-color: #ede0c8;
+}
+
+.eight {
+    color: #f9f6f2;
+    background-color: #f2b179;
+}
+
+.sixteen {
+    color: #f9f6f2;
+    background-color: #f59563;
+}
+
+.thirty-two {
+    color: #f9f6f2;
+    background-color: #f67c5f;
+}
+
+.sixty-four {
+    color: #f9f6f2;
+    background-color: #f65e3b;
+}
+
+.one-twenty-eight {
+    color: #f9f6f2;
+    background-color: #edcf72;
+}
+
+.two-fifty-six {
+    color: #f9f6f2;
+    background-color: #edcc61;
+}
+
+.five-one-two {
+    color: #f9f6f2;
+    background-color: #edc850;
+}
+
+.one-k {
+    color: #f9f6f2;
+    background-color: #edc53f;
+}
+
+.two-k {
+    color: #f9f6f2;
+    background-color: #edc22e;
+}
+
+.four-k {
+    color: #f9f6f2;
+    background-color: #fb736b;
+}
+
+.eight-k {
+    color: #f9f6f2;
+    background-color: #fb5c58;
+}
+
+.sixteen-k {
+    color: #f9f6f2;
+    background-color: #ee5138;
+}
+
+.thirty-two-k {
+    color: #f9f6f2;
+    background-color: #6dafdb;
+}
+
+.sixty-five-k {
+    color: #f9f6f2;
+    background-color: #599be5;
+}
+
+.one-thirty-one-k {
+    color: #f9f6f2;
+    background-color: #0073c2;
+}

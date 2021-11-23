@@ -1,3 +1,11 @@
+.grid {
+    background-color: #bbada0;
+    display: inline-block;
+}
+.row {
+    display: block;
+}
 .tile {
     display: inline-block;
+    color: #fff;
 }
