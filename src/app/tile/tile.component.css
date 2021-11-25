@@ -1,89 +1,37 @@
-/* better to use styled components instead of this? */
-.blank {
-    background-color: #d6cdc4;
+.value {
+    width: 100%;
+    text-align: center;
 }
 
-.two {
-    color: #776e65;
-    background-color: #eee4da;
+/* font-size is relative to that of .tile in board css */
+.value.one-k {
+    font-size: 75%;
 }
 
-.four {
-    color: #776e65;
-    background-color: #ede0c8;
+.value.two-k {
+    font-size: 75%;
 }
 
-.eight {
-    color: #f9f6f2;
-    background-color: #f2b179;
+.value.four-k {
+    font-size: 75%;
 }
 
-.sixteen {
-    color: #f9f6f2;
-    background-color: #f59563;
+.value.eight-k {
+    font-size: 75%;
 }
 
-.thirty-two {
-    color: #f9f6f2;
-    background-color: #f67c5f;
+.value.sixteen-k {
+    font-size: 60%;
 }
 
-.sixty-four {
-    color: #f9f6f2;
-    background-color: #f65e3b;
+.value.thirty-two-k {
+    font-size: 60%;
 }
 
-.one-twenty-eight {
-    color: #f9f6f2;
-    background-color: #edcf72;
+.value.sixty-five-k {
+    font-size: 60%;
 }
 
-.two-fifty-six {
-    color: #f9f6f2;
-    background-color: #edcc61;
-}
-
-.five-one-two {
-    color: #f9f6f2;
-    background-color: #edc850;
-}
-
-.one-k {
-    color: #f9f6f2;
-    background-color: #edc53f;
-}
-
-.two-k {
-    color: #f9f6f2;
-    background-color: #edc22e;
-}
-
-.four-k {
-    color: #f9f6f2;
-    background-color: #fb736b;
-}
-
-.eight-k {
-    color: #f9f6f2;
-    background-color: #fb5c58;
-}
-
-.sixteen-k {
-    color: #f9f6f2;
-    background-color: #ee5138;
-}
-
-.thirty-two-k {
-    color: #f9f6f2;
-    background-color: #6dafdb;
-}
-
-.sixty-five-k {
-    color: #f9f6f2;
-    background-color: #599be5;
-}
-
-.one-thirty-one-k {
-    color: #f9f6f2;
-    background-color: #0073c2;
+.value.one-thirty-one-k {
+    font-size: 50%;
 }

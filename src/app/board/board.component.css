@@ -1,11 +1,97 @@
 .grid {
     background-color: #bbada0;
+    padding: 0;
     display: inline-block;
+    margin: 0 auto;
+    border-radius: 8px;
 }
 .row {
     display: block;
+    margin: 9px 4.5px;
 }
 .tile {
     display: inline-block;
-    color: #fff;
+    vertical-align: top;
+    font-size: 200%;
+    border-radius: 4px;
+    width: 64px;
+    height: 64px;
+    padding: 8px;
+    margin: 0 4.5px;
+    line-height: 64px;
+    color: #f9f6f2;
+}
+
+.tile.blank {
+    background-color: #d6cdc4;
+}
+
+.tile.two {
+    color: #776e65;
+    background-color: #eee4da;
+}
+
+.tile.four {
+    color: #776e65;
+    background-color: #ede0c8;
+}
+
+.tile.eight {
+    background-color: #f2b179;
+}
+
+.tile.sixteen {
+    background-color: #f59563;
+}
+
+.tile.thirty-two {
+    background-color: #f67c5f;
+}
+
+.tile.sixty-four {
+    background-color: #f65e3b;
+}
+
+.tile.one-twenty-eight {
+    background-color: #edcf72;
+}
+
+.tile.two-fifty-six {
+    background-color: #edcc61;
+}
+
+.tile.five-one-two {
+    background-color: #edc850;
+}
+
+.tile.one-k {
+    background-color: #edc53f;
+}
+
+.tile.two-k {
+    background-color: #edc22e;
+}
+
+.tile.four-k {
+    background-color: #fb736b;
+}
+
+.tile.eight-k {
+    background-color: #fb5c58;
+}
+
+.tile.sixteen-k {
+    background-color: #ee5138;
+}
+
+.tile.thirty-two-k {
+    background-color: #6dafdb;
+}
+
+.tile.sixty-five-k {
+    background-color: #599be5;
+}
+
+.tile.one-thirty-one-k {
+    background-color: #0073c2;
 }
