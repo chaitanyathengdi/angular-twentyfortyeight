@@ -1,3 +1,8 @@
+.wrapper {
+    display: block;
+    text-align: center; /* because .grid is inline-block */
+}
+
 .grid {
     background-color: #bbada0;
     padding: 0;

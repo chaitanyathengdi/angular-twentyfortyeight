@@ -4,6 +4,7 @@
     width: 100%;
     box-sizing: border-box;
     min-height: 450px;
+    height: 100vh; /* might have issues - check later */
     font-family: ClearSansBold;
-    padding: 0 1rem;
+    padding: 0 16px;
 }
