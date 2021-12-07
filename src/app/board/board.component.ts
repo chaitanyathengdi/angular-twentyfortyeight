@@ -22,6 +22,10 @@ const keyBindings = {
 export class BoardComponent implements OnInit {
   // init values to empty based on emptyValues
   values = emptyValues.map(emptyRow => Object.assign(<number[]>[], emptyRow));
+  // Indicates if the board is full and so no new value is to be generated
+  // Depends on the generateNewValue function so is one step behind the actual
+  // fullness of the board
+  boardIsFull = false;
 
   constructor() { }
 
@@ -52,6 +56,10 @@ export class BoardComponent implements OnInit {
       case keyBindings.right:
         this.moveRight();
         break;
+    }
+
+    if(!this.boardIsFull) {
+      this.boardIsFull = !this.generateNewValue();
     }
   }
 
@@ -154,6 +162,37 @@ export class BoardComponent implements OnInit {
         }
       });
     }
+  }
+
+  // (Inefficient) method for generating a random 2 or 4 at a blank location
+  // returns true if a new value is generated, else returns false(i.e. the board is full)
+  generateNewValue() : boolean {
+    const emptyPlaces: number[][] = [];
+    // 1 in 10 chance to generate a 4 instead of a 2
+    const generateA4 = Math.random() > 0.9 ? true : false;
+    this.values.forEach((row, rowIndex) => {
+      row.forEach((column, columnIndex) => {
+        if(column === 0) emptyPlaces.push([rowIndex, columnIndex]);
+      });
+    });
+
+    if (emptyPlaces.length > 0) {
+      const newValueIndex = Math.floor(Math.random() * emptyPlaces.length);
+      const rowIndex = emptyPlaces[newValueIndex][0];
+      const columnIndex = emptyPlaces[newValueIndex][1];
+      if (generateA4) {
+        this.values[rowIndex][columnIndex] = 4;
+      } else {
+        this.values[rowIndex][columnIndex] = 2;
+      }
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  combineValues () {
+    console.log('Values combined')
   }
 
   getClassForValue (value:number | null): string {
