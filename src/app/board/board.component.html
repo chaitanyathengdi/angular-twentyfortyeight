@@ -1,5 +1,5 @@
 <div class="wrapper">
-    <div class="grid">
+    <div class="grid" (keypress)="onKeyPress($event)">
         <div class="row">
             <tile [class]="getClassForValue(values[0][0])" class="tile" [value]="values[0][0]"></tile>
             <tile [class]="getClassForValue(values[0][1])" class="tile" [value]="values[0][1]"></tile>
