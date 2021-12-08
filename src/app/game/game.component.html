@@ -1,6 +1,6 @@
 <div class="game">
     <h1>2048</h1>
-    <info></info>
+    <info [score]="score" [highScore]="highScore"></info>
     <actions></actions>
-    <board></board>    
+    <board (addToScore)="addToScore($event)"></board>    
 </div>

@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
 
 const emptyValues = [
   [0, 0, 0, 0],
@@ -30,7 +30,12 @@ export class BoardComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    // call generateNewValue twice to have two new values on the board initially
+    this.generateNewValue();
+    this.generateNewValue();
   }
+
+  @Output() addToScore: EventEmitter<any> = new EventEmitter();
 
   isBlank(rowIndex: number, columnIndex: number) {
     if(rowIndex < 0 || columnIndex < 0 || rowIndex > 3 || columnIndex > 3) return false;
@@ -89,7 +94,17 @@ export class BoardComponent implements OnInit {
             }
             if(j !== -1) {
               this.values[rowIndex][j] = this.values[rowIndex][columnIndex];
-              this.setBlank(rowIndex, columnIndex);  
+              this.setBlank(rowIndex, columnIndex);
+              if (j <= 1) {
+                if(this.values[rowIndex][j] === this.values[rowIndex][j - 1]) {
+                  this.combineValues("left", rowIndex, j - 1);
+                }
+              }
+            } else {
+              // if j is -1 then the square to the left of this square is not blank
+              if(this.values[rowIndex][columnIndex] === this.values[rowIndex][columnIndex - 1]) {
+                this.combineValues("left", rowIndex, columnIndex - 1);
+              }
             }
           }
         });
@@ -113,6 +128,16 @@ export class BoardComponent implements OnInit {
         if(j !== -1) {
           this.values[j][columnIndex] = this.values[currentRow][columnIndex];
           this.setBlank(currentRow, columnIndex);
+          if(j >= 1) {
+            if(this.values[j][columnIndex] === this.values[j - 1][columnIndex]) {
+              this.combineValues("up", j - 1, columnIndex);
+            }  
+          }
+        } else {
+          // if j is -1 then the square above this square is not blank
+          if(this.values[currentRow][columnIndex] === this.values[currentRow - 1][columnIndex]) {
+            this.combineValues("up", currentRow - 1, columnIndex);
+          }
         }
       });
     }
@@ -133,6 +158,16 @@ export class BoardComponent implements OnInit {
         if(j !== -1) {
           this.values[rowIndex][j] = this.values[rowIndex][currentColumn];
           this.setBlank(rowIndex, currentColumn);
+          if(j <= 2) {
+              if(this.values[rowIndex][j] === this.values[rowIndex][j + 1]) {
+              this.combineValues("right", rowIndex, j + 1);
+            }
+          }
+        } else {
+          // if j is -1 then the square to the right of this square is not blank
+          if(this.values[rowIndex][currentColumn] === this.values[rowIndex][currentColumn + 1]) {
+            this.combineValues("right", rowIndex, currentColumn + 1);
+          }
         }
       });
     }
@@ -159,6 +194,16 @@ export class BoardComponent implements OnInit {
         if(j !== -1) {
           this.values[j][columnIndex] = this.values[currentRow][columnIndex];
           this.setBlank(currentRow, columnIndex);
+          if(j <= 2) {
+            if(this.values[j][columnIndex] === this.values[j + 1][columnIndex]) {
+              this.combineValues("down", j + 1, columnIndex);
+            }
+          }
+        } else {
+          // if j is -1 then the square below this square is not blank
+          if(this.values[currentRow][columnIndex] === this.values[currentRow + 1][columnIndex]) {
+            this.combineValues("down", currentRow + 1, columnIndex);
+          }
         }
       });
     }
@@ -191,8 +236,44 @@ export class BoardComponent implements OnInit {
     }
   }
 
-  combineValues () {
-    console.log('Values combined')
+  addScore(value: number) {
+    this.addToScore.emit(value);
+  }
+
+  combineValues (direction: string, rowIndex: number, columnIndex: number) {
+    if(direction === "left") {
+      // rowIndex would be the same, columnIndex would be one higher, all tiles to the right to be shifted one left
+      this.values[rowIndex][columnIndex] = 2 * this.values[rowIndex][columnIndex];
+      this.addScore(this.values[rowIndex][columnIndex]);
+      for(let i = columnIndex + 1; i < 3; i++) {
+        this.values[rowIndex][i] = this.values[rowIndex][i + 1];
+      }
+      this.setBlank(rowIndex, 3);
+    } else if(direction === "up") {
+      // columnIndex would be the same, rowIndex would be one higher, all tiles below should be shifted one up
+      this.values[rowIndex][columnIndex] = 2 * this.values[rowIndex][columnIndex];
+      this.addScore(this.values[rowIndex][columnIndex]);
+      for(let i = rowIndex + 1; i < 3; i++) {
+        this.values[i][columnIndex] = this.values[i + 1][columnIndex];
+      }
+      this.setBlank(3, columnIndex);
+    } else if(direction === "right") {
+      // rowIndex would be the same, columnIndex would be one lower, all tiles to the left to be shifted one right
+      this.values[rowIndex][columnIndex] = 2 * this.values[rowIndex][columnIndex];
+      this.addScore(this.values[rowIndex][columnIndex]);
+      for(let i = columnIndex - 1; i > 0; i--) {
+        this.values[rowIndex][i] = this.values[rowIndex][i - 1];
+      }
+      this.setBlank(rowIndex, 0);
+    } else if(direction === "down") {
+      // columnIndex would be the same, rowIndex would be one lower, all tiles above to be shifted one down
+      this.values[rowIndex][columnIndex] = 2 * this.values[rowIndex][columnIndex];
+      this.addScore(this.values[rowIndex][columnIndex]);
+      for(let i = rowIndex - 1; i > 0; i--) {
+        this.values[i][columnIndex] = this.values[i - 1][columnIndex];
+      }
+      this.setBlank(0, columnIndex);
+    } 
   }
 
   getClassForValue (value:number | null): string {
@@ -225,3 +306,7 @@ export class BoardComponent implements OnInit {
   }
 
 }
+
+// Issue with seamless integration of move and combine - sometimes when two equal values are farther than
+// one square apart, the values, instead of combining directly, would move adjacent to one another and
+// then combine. These should combine directly.
