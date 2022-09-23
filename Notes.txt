@@ -1,0 +1,37 @@
+Basic 2048 application - no extraneous functionality in phase 1
+
+1. Check all the colors for the tiles - from blank to 131072
+2. Score works the same as the original: if 2 x tiles combine into 1 2x tile,
+   the score increases by 2x
+3. Undo functionality not implemented in v1.0
+4. Every move a 2 is generated in a random blank location; every 8-12 moves a 4
+   is generated instead of a 2
+5. Reset moves counter of the generated 4 every time it is generated; e.g. from
+   9 to 0 - then set a new counter
+6. Game is over if no two adjacent tiles(either vertical or horizontal, and
+   excluding rim tiles) have the same value and no tiles are blank
+7. Use 4x4 2D array of values instead of a 16x 1D array - better to determine
+   adjacent tile values in that
+8. High score is noted in local storage; and will update each time it's exceeded
+9. Letter size is 1/6 of box size, maximum; then adjusts with increasing number
+   and leaves 5px space on all sides minimum
+10. May use CSS Grid for adjusting boxes and centering values
+11. Number color varies with tile color: dark if tile is light and light if tile
+    is dark
+12. Tiles only move using arrow keys
+13. When two tiles combine, just convert the "disappearing" tile into a blank
+    tile(i.e. no animations) or the adjacent tile that's replacing it
+
+Move logic
+
+For each tile:
+Example logic for moveLeft:
+1. Start from the 2nd column(2nd leftmost column). For up/down/right it'll be
+   2nd top/bottom/right column respectively.
+2. Can a tile in the column move to the 1st column? Is the tile that the current
+   tile wants to occupy empty? If so, move the current tile to the target tile.
+   Replace this tile with an empty one.
+3. Repeat the process for all four tiles in that column.
+4. Move to the third column. This time check for empty tiles in the 2nd and 1st
+   columns. If all the tiles upto an ith column are empty, move current tile to
+   the ith column. Replace with empty tile.
